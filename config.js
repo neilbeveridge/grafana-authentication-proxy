@@ -99,8 +99,7 @@ module.exports =  {
         // Multiple user/passwd supported
         // The User&Passwd list for basic auth
         "basic_auth_users": [
-            {"user": "demo1", "password": "pwd1", "groups": "neil"},
-            {"user": "demo2", "password": "pwd2"},
+            {"user": "readonly", "password": "readonly", "groups": "sandbox"},
         ],
 
 
