@@ -3,8 +3,8 @@ module.exports =  {
     ////////////////////////////////////
     // ElasticSearch Backend Settings
     ////////////////////////////////////
-    "es_host": "localhost",  // The host of Elastic Search
-    "es_port": 9200,  // The port of Elastic Search
+    "es_host": "elasticsearch.prod.hcom",  // The host of Elastic Search
+    "es_port": 80,  // The port of Elastic Search
     "es_using_ssl": false,  // If the ES is using SSL(https)?
     "es_username":  "",  // The basic authentication user of ES server, leave it blank if no basic auth applied
     "es_password":  "",  // The password of basic authentication of ES server, leave it blank if no basic auth applied.
@@ -41,7 +41,7 @@ module.exports =  {
     // Config "grafana_es_index": "grafana-int-for-%user%", "which_auth_type_for_grafana_index": "basic"
     // will use grafana index settings like "grafana-int-for-demo1", "grafana-int-for-demo2" for user demo1 and demo2.
     // in this case, if you enabled both Google Oauth2 and BasicAuth, and the username of BasicAuth is the boss.
-    "grafana_es_index": "grafana-dash-%user%", // "grafana-int-%user%"
+    "grafana_es_index": "grafana-dash-global", // "grafana-int-%user%"
     "which_auth_type_for_grafana_index": "basic", // google, cas or basic
 
     /**
@@ -51,14 +51,14 @@ module.exports =  {
      * in nginx or apache for cross origin domain sharing to work (CORS).
      * Check install documentation on github
      */
-    "graphiteUrl": "http://"+window.location.hostname+":8080",
+    "graphiteUrl": "http://graphite.prod.hcom",
     
     ////////////////////////////////////
     // Security Configurations
     ////////////////////////////////////
     // Cookies secret
     // Please change the following secret randomly for security.
-    "cookie_secret": "REPLACE_WITH_A_RANDOM_STRING_PLEASE",
+    "cookie_secret": "lhiueliegblegiu98py349y8p34yprbkhq",
 
 
     ////////////////////////////////////
@@ -87,7 +87,7 @@ module.exports =  {
     // The following config is different from the previous basic auth settings.
     // It will be applied on the client who access grafana.
     // Enable? true or false
-    "enable_basic_auth": false,
+    "enable_basic_auth": true,
     // If basic_auth_file is specified and exists, the user password combinations
     // are read from the named file and overrule the here defined settings from
     // array basic_auth_users.
@@ -99,8 +99,8 @@ module.exports =  {
         // Multiple user/passwd supported
         // The User&Passwd list for basic auth
         "basic_auth_users": [
-            {"user": "demo1", "password": "pwd1"},
-            {"user": "demo1", "password": "pwd2"},
+            {"user": "demo1", "password": "pwd1", "group": "neil"},
+            {"user": "demo2", "password": "pwd2"},
         ],
 
 

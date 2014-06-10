@@ -1,6 +1,12 @@
 grafana Authentication Proxy
 ============
 
+In this Fork:
+
+- Added the capability to give users a set of dashboard prefixes that they own.
+- The Proxy denies PUT & POST for Dashboards not matching their prefix pattern, preventing modification of others' Dashboards.
+- Users can read all dashboards.
+
 Hosts the latest [grafana](https://github.com/torkelo/grafana) and elasticsearch behind Google OAuth2, Basic Authentication or CAS Authentication with NodeJS and Express.
 
 - A proxy between Elasticsearch, grafana and user client

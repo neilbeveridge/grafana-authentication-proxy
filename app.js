@@ -13,7 +13,18 @@ var https = require('https');
 var http = require('http');
 var fs = require('fs');
 
-var config = require('./config');
+function freshConfig () {
+  return config;
+}
+
+var config = require('./config.js');
+fs.watchFile('./config.js', function (current, previous) {
+  if (current.mtime.toString() !== previous.mtime.toString()) {
+    delete require.cache[require.resolve('./config.js')];
+    config = require('./config.js');
+  }
+});
+
 var app = express();
 
 console.log('Server starting...');
@@ -39,9 +50,9 @@ if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.b
         }
     }
 }
-require('./lib/basic-auth').configureBasic(express, app, config);
-require('./lib/google-oauth').configureOAuth(express, app, config);
-require('./lib/cas-auth.js').configureCas(express, app, config);
+require('./lib/basic-auth').configureBasic(express, app, freshConfig);
+require('./lib/google-oauth').configureOAuth(express, app, freshConfig);
+require('./lib/cas-auth.js').configureCas(express, app, freshConfig);
 
 // Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
